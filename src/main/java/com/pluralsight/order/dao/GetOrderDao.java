@@ -31,7 +31,7 @@ public class GetOrderDao {
      * @return Object with the main information of an order
      */
     public OrderDto getOrderById(ParamsDto paramsDto) {
-        OrderDto orderDto = null;
+        OrderDto orderDto = new OrderDto();
 
         try (Connection con = database.getConnection();
              PreparedStatement ps = createPreparedStatement(con, paramsDto.getOrderId());
