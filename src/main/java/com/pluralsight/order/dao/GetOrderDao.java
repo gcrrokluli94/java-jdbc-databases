@@ -31,13 +31,14 @@ public class GetOrderDao {
      * @return Object with the main information of an order
      */
     public OrderDto getOrderById(ParamsDto paramsDto) {
-        OrderDto orderDto = new OrderDto();
+        OrderDto orderDto = null;
 
         try (Connection con = database.getConnection();
              PreparedStatement ps = createPreparedStatement(con, paramsDto.getOrderId());
              ResultSet rs = createResultSet(ps)
         ) {
             if (rs.next()) {
+                orderDto = new OrderDto();
                 orderDto.setOrderId(rs.getLong("order_id"));
                 orderDto.setCustomerId(rs.getLong("order_customer_id"));
                 orderDto.setDate(rs.getDate("order_date"));
