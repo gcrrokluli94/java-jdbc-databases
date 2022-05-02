@@ -63,7 +63,7 @@ public class DeleteOrderDao {
     private PreparedStatement createPreparedStatement(Connection con, List<Long> orderIds) throws SQLException {
         String sql = buildDeleteSql(orderIds);
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setLong(orderIds);
+        ps.setLong(1,orderIds.get(1));
         return ps;
     }
 }
