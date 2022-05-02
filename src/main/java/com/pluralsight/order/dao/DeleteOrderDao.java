@@ -49,7 +49,7 @@ public class DeleteOrderDao {
      * @return Delete SQL statement
      */
     private String buildDeleteSql(List<Long> orderIds) {
-        String ids = String.join("",Collections.nCopies(orderIds.size(), "?"));
+        String ids = String.join(",",Collections.nCopies(orderIds.size(), "?"));
 
         return "DELETE FROM orders o WHERE o.order_id IN (" + ids + ")";
     }
