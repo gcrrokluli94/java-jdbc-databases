@@ -59,8 +59,6 @@ public class InsertOrderDao {
                                 if (detailsPS.executeUpdate() != 1) {
                                     con.rollback();
                                     orderId = -1;
-                                } else {
-                                    detailsPS.executeUpdate();
                                 }
                             }
                         }
