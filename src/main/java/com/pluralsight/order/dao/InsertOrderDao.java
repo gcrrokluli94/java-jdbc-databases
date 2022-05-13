@@ -47,7 +47,7 @@ public class InsertOrderDao {
             try (ResultSet result = ps.getGeneratedKeys()) {
                 if(result != null) {
                     if(!result.next()){
-                        con.setAutoCommit(false);
+                        con.rollback();
                     } else {
                         orderId = result.getLong("order_id");
 
@@ -57,7 +57,7 @@ public class InsertOrderDao {
                             try (PreparedStatement detailsPS =
                                          createOrderDetailPreparedStatement(con, orderDetailDto)) {
                                 if (detailsPS.executeUpdate() != 1) {
-                                    con.setAutoCommit(false);
+                                    con.rollback();
                                     orderId = -1;
                                 } else {
                                     detailsPS.executeUpdate();
