@@ -42,17 +42,14 @@ public class InsertOrderDao {
         ) {
             con.setAutoCommit(false);
             ps.executeUpdate();
-
             try (ResultSet result = ps.getGeneratedKeys()) {
                 if(result != null) {
                     if(!result.next()){
                         con.rollback();
                     } else {
                         orderId = result.getLong(1);
-
                         for (OrderDetailDto orderDetailDto : orderDto.getOrderDetail()) {
                             orderDetailDto.setOrderId(orderId);
-
                             try (PreparedStatement detailsPS =
                                          createOrderDetailPreparedStatement(con, orderDetailDto)) {
                                 int count = detailsPS.executeUpdate();
@@ -72,7 +69,6 @@ public class InsertOrderDao {
         } catch (SQLException ex) {
             ExceptionHandler.handleException(ex);
         }
-
         return orderId;
     }
 
